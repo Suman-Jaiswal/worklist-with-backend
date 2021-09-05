@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router';
 import axios from 'axios'
+import DeleteTopicBtn from './DeleteTopicBtn';
+import { PlanContext } from '../contexts/PlanContext';
+import AddTopicBtn from './AddTopicBtn';
 
 export default function PlanDetails() {
-
+    const { topics } = useContext(PlanContext).state
     const { id } = useParams()
-    const [topics, setTopics] = useState([])
+    const [topicsR, setTopicsR] = useState([])
     const [plan, setPlan] = useState({})
     const [loading, setLoading] = useState(true)
     const [toggle, setToggle] = useState(true)
@@ -30,32 +33,37 @@ export default function PlanDetails() {
 
         axios.get(`/api/topics/${id}`)
             .then(res => {
-                setTopics(res.data)
+                setTopicsR(res.data)
+                setLoading(false)
             })
             .catch(err => console.log(err))
-        setLoading(false)
-    }, [id, toggle])
+        
+    }, [id, toggle, topics])
 
-    return (<>
+    return (
+        <div className=' my-3 container-lg' style={{ minHeight: '79vh' }}>
         {
-            loading ? <div>Loading...</div> :
-                <div style={{ minHeight: '83.3vh' }} >
+            loading ? <h4 className='text-secondary text-center pt-5'>Loading...</h4> :
+                <div >
 
-                    <div className="display-6 pt-3 text-center" >
+                    <div className="display-6 px-3 " >
                         {plan && plan.title}
                     </div>
 
-                    <div className=" text-center pt-1 pb-3">
-                        {'{'} {plan && plan.description} {'}'} {' Topics: '} {topics ? topics.length : 0}
+                    <div className="py-1 px-3 d-flex justify-content-between" style={{borderBottom: '0.5px solid #dddddd'}} >
+                        <span> {'('} {plan && plan.description} {')'}</span>
+                        <span className='' > {' Topics: '} {topicsR ? topicsR.length : 0}</span>
                     </div>
 
+                    <div className="container pt-3"> <AddTopicBtn variant={'outline-primary'} color={''} planID={id}/></div>
+               
                     <div className="container my-2">
 
                         <div className="inbox">
                             {
-                                topics ? topics.map((topic, i) => <div key={i} className="item">
+                                topicsR ? topicsR.map((topic, i) => <div key={i} className="item">
                                     {` ${i + 1}. `}  <input type="checkbox" onChange={() => handleCheck(topic)} checked={topic.completed} />
-                                    <p className='topic-name'> {topic.title}</p>
+                                    <p className='topic-name'> {topic.title}</p> <DeleteTopicBtn title={topic.title} id={topic._id}/>
                                 </div>) : null
                             }
                         </div>
@@ -65,7 +73,7 @@ export default function PlanDetails() {
                 </div>
         }
 
-    </>
+    </div>
 
     )
 }

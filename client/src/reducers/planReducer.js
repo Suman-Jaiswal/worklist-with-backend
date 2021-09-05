@@ -24,6 +24,11 @@ export const planReducer = (state, action) => {
                 plans: state.plans.filter(plan => plan._id !== action.id)
             }
 
+        case 'DELETE_TOPIC':
+            return {...state,
+                topics: state.topics.filter(topic => topic._id !== action.id)
+            }
+
         case 'GET_PLANS':
             return {
                 ...state,

@@ -64,11 +64,31 @@ router.put('/:id', (req, res) => {
 
 })
 
-router.delete('/:id',  async (req, res) => {
+router.delete('/:planID',  async (req, res) => {
     try{
-        const topics = await Topic.deleteMany({planID: req.params.id})
+        const topics = await Topic.deleteMany({planID: req.params.planID})
         
         if(!topics) throw Error('Something went wrong while deleting the plan')
+
+        res.status(200).json({
+            success: true
+        })
+    }
+    catch(e){
+        res.status(400).json({
+            msg: e.message,
+            success: false
+        })
+    }
+})
+
+router.delete('/topic/:id',  async (req, res) => {
+    try{
+        const topic = await Topic.findById(req.params.id)
+        if (!topic) throw Error('No such topic found!')
+        
+        const removed = await topic.remove()
+        if(!removed) throw Error('Something went wrong while deleting the topic')
 
         res.status(200).json({
             success: true

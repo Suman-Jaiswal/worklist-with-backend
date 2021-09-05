@@ -36,7 +36,7 @@ export default function Dashboard() {
     return (
         <div className='d-flex flex-wrap container-lg my-5 gap-4 dashboard' style={{ minHeight: '70.2vh' }}>
         {
-            loading? <div>Loading...</div>:
+            loading? <h4 className='text-secondary mx-auto'>Loading...</h4>:
             <>
             {
                 plans.length > 0 ? plans.map(
