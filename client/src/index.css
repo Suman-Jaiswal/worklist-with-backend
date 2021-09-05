@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Reggae+One&display=swap');
+body{
+    background-color: #f5f5f5 !important;
+}
+
+.inbox {
+    padding: 0 20px;
+	margin: 10px auto 50px auto;
+	background: white;
+	border-radius: 5px;
+	box-shadow: 0px -1px 2px rgba(0, 0, 0, 0.1);
+}
+.brand-logo{
+    font-family: 'Reggae One', cursive;
+    font-size: 2rem;
+}
+
+.item {
+	display: flex;
+	align-items: center;
+	border-bottom: 1px solid #F1F1F1;
+}
+.item > p{
+    margin: 0 !important;
+	padding: 10px;
+	transition: background 0.5s;
+	flex: 1;
+	font-family: 'helvetica neue';
+	font-size: 18px;
+	font-weight: 200;
+	border-left: 1px solid #D1E2FF;
+}
+
+.item:last-child {
+	border-bottom: 0;
+}
+
+input:checked+p {
+	background: #F9F9F9;
+	text-decoration: line-through;
+    color: rgba(80, 85, 5, 0.5);
+}
+
+input[type="checkbox"] {
+	margin: 15px;
+    height: 25px;
+    width: 25px;
+}
+
+button:focus{
+    outline: none !important;
+    box-shadow: none !important;
+    filter: saturate(0.5);
+}
+.footer{
+    display: flex;
+   justify-content: flex-end;
+}
+.social{
+    width: 25%;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+.cp-text{
+    width: 50%;
+    color: rgb(255, 255, 255); 
+    text-shadow: 0 1px rgba(255, 255, 255, 0.1);
+    margin-bottom: 0;
+    }
+
+@media only screen and (max-width: 990px) {
+    .dashboard{
+      justify-content: center;
+    
+    }
+}
+@media only screen and (max-width: 720px) {
+    .dashboard{
+       flex-direction: column;
+       align-items: center;
+       justify-content: flex-start;
+    }
+    .brand-logo{
+        font-size: 1.5rem;
+    }
+    .footer{
+        flex-direction: column;
+        align-items: center;
+        font-size: 14px;
+    }
+    .cp-text{
+        width: 95%;
+    }
+    .social{
+        margin: 10px 0;
+    }
+    .create-text{
+        display: none;
+    }
+}
