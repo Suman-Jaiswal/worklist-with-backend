@@ -20,7 +20,7 @@ mongoose.connect(DB_URI, {
 
 
 //middleware
-app.use(cors)
+app.use(cors())
 
 app.use(express.json())
 app.use('/api/plans', planRouter)
