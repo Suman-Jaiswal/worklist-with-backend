@@ -18,7 +18,7 @@ export const authReducer = (state, action) => {
         case 'LOADING':
             return {
                 ...state,
-                loading: false
+                loading: action.payload
             }
         default:
             return state
