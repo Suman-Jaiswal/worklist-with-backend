@@ -4,6 +4,7 @@ import { PlanContext } from '../contexts/PlanContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
+import { AuthContext } from '../contexts/AuthContext'
 
 export default function AddPlanBtn({ variant, color }) {
 
@@ -13,6 +14,7 @@ export default function AddPlanBtn({ variant, color }) {
     const [description, setDescription] = useState('')
     const [topics, setTopics] = useState([])
     const [input, setInput] = useState('')
+    const {user} = useContext(AuthContext).state
 
     const openModal = () => {
         setOpen(true)
@@ -46,12 +48,14 @@ export default function AddPlanBtn({ variant, color }) {
     const handleSubmit = (e) => {
         e.preventDefault()
         closeModal()
-        axios.post('/api/plans', {
+        axios.post(`/api/plans`, {
             title,
-            description
+            description,
+            author: user,
+            collaborators: [user.email]
         })
             .then(res => {
-                dispatch({ type: 'ADD_PLAN', payload: { _id: res.data._id, title, description } })
+                dispatch({ type: 'ADD_PLAN', payload: res.data })
                 axios.post(`/api/topics/${res.data._id}`, {
                     topics: makeTopics(res.data._id)
                 })
@@ -69,7 +73,7 @@ export default function AddPlanBtn({ variant, color }) {
 
     return (
         <>
-            <Button variant={variant} className={color} onClick={openModal} aria-labelledby="contained-modal-title-vcenter" >
+            <Button disabled={Object.entries(user).length===0} variant={variant} className={color} onClick={openModal} aria-labelledby="contained-modal-title-vcenter" >
                 <FontAwesomeIcon icon={faPlus} size='lg' /> <span className='ms-1 create-text'>Create</span>
             </Button>
 

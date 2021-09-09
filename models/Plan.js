@@ -12,6 +12,14 @@ const PlanSchema = new Schema({
         type: String,
         required: true
     },
+    author: {
+        type: Object,
+        required: true
+    },
+    collaborators: {
+        type: Array,
+        required: true,
+    },
     date: {
         type: Date,
         default: Date.now

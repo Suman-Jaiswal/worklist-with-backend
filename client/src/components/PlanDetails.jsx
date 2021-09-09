@@ -4,13 +4,16 @@ import axios from 'axios'
 import DeleteTopicBtn from './DeleteTopicBtn';
 import { PlanContext } from '../contexts/PlanContext';
 import AddTopicBtn from './AddTopicBtn';
+import { AuthContext } from '../contexts/AuthContext';
 
 export default function PlanDetails() {
     const { topics } = useContext(PlanContext).state
+    const { user, loading, authorised } = useContext(AuthContext).state
     const { id } = useParams()
     const [topicsR, setTopicsR] = useState([])
     const [plan, setPlan] = useState({})
-    const [loading, setLoading] = useState(true)
+    const [pageLoading, setpageLoading] = useState(true)
+    const [access, setAccess] = useState(true)
     const [toggle, setToggle] = useState(true)
 
     const handleCheck = (topic) => {
@@ -25,25 +28,42 @@ export default function PlanDetails() {
     }
 
     useEffect(() => {
-        axios.get(`/api/plans/${id}`)
+
+        setpageLoading(loading)
+
+        if (!authorised) {
+            setAccess(false)
+            return
+        }
+
+        setpageLoading(true)
+
+        axios.get(`/api/plans/plan/${id}`)
             .then(res => {
-                setPlan(res.data)
+                if (res.data.collaborators.includes(user.email)) {
+                    setAccess(true) 
+                    setPlan(res.data)
+                }
+                else {
+                    setAccess(false)
+                    setpageLoading(false)
+                    return
+                }
+                axios.get(`/api/topics/${id}`)
+                .then(res => {
+                    setTopicsR(res.data)
+                    setpageLoading(false)
+                })
+                .catch(err => console.log(err))
             })
             .catch(err => console.log(err))
 
-        axios.get(`/api/topics/${id}`)
-            .then(res => {
-                setTopicsR(res.data)
-                setLoading(false)
-            })
-            .catch(err => console.log(err))
-        
-    }, [id, toggle, topics])
+    }, [id, toggle, topics, user, authorised, loading])
 
     return (
         <div className=' my-3 container-lg' style={{ minHeight: '79vh' }}>
         {
-            loading ? <h4 className='text-secondary text-center pt-5'>Loading...</h4> :
+            pageLoading ? <h4 className='text-secondary text-center pt-5'>Loading...</h4> : access ?
                 <div >
 
                     <div className="display-6 px-3 " >
@@ -70,7 +90,7 @@ export default function PlanDetails() {
 
                     </div>
 
-                </div>
+                </div>: <h4 className='text-danger text-center pt-5'>You are not allowed to access this page, contact author of the plan! {!authorised? 'Also make sure you are logged in.': null } </h4>
         }
 
     </div>

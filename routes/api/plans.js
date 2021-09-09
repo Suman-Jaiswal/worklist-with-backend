@@ -3,9 +3,11 @@ const router = express.Router()
 const Plan = require('../../models/Plan')
 const Topic = require('../../models/Topic')
 
-router.get('/', async (req, res) => {
+router.get('/:collaborator', async (req, res) => {
     try {
-        const plans = await Plan.find()
+        const plans = await Plan.find({
+            collaborators: req.params.collaborator
+        })
         if (!plans) throw Error('no content!')
         res.status(200).json(plans)
     }
@@ -16,7 +18,7 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.get('/:id', async (req, res) => {
+router.get('/plan/:id', async (req, res) => {
     try {
         const plan = await Plan.findById(req.params.id)
         if (!plan) throw Error('no content!')

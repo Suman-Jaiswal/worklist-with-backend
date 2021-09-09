@@ -5,11 +5,9 @@ export const planReducer = (state, action) => {
         case 'ADD_PLAN':
             return {
                 ...state,
-                plans: [...state.plans, {
-                    _id: action.payload._id,
-                    title: action.payload.title,
-                    description: action.payload.description
-                }],
+                plans: [...state.plans,
+                    action.payload
+                ]
             }
         
         case 'ADD_TOPICS':

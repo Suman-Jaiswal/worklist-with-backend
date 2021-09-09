@@ -12,7 +12,7 @@ function App() {
         <div className='App'>
 
             <PlanContextProvider>
-
+              
                 <Navbar />
 
                 <Switch>

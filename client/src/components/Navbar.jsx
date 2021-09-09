@@ -1,10 +1,17 @@
 import { AppBar } from '@material-ui/core'
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { AuthContext } from '../contexts/AuthContext'
 import AddPlanBtn from './AddPlanBtn'
 import Icon from './Icon'
+import LoginBtn from './LoginBtn'
+import LogoutBtn from './LogoutBtn'
 
 function Navbar() {
+
+    const { state } = useContext(AuthContext)
+    const { user } = state
+
     return (
         <AppBar position='static'>
 
@@ -19,6 +26,17 @@ function Navbar() {
 
                     <div className='my-auto' >
                         <AddPlanBtn variant={'success'} />
+                        {
+                            Object.entries(user).length > 0 ?
+                                <LogoutBtn />
+                                :
+                                <LoginBtn />
+                        }
+                        <div className='d-inline ms-2' >
+                            {
+                                Object.entries(user).length > 0 && <img src={user.imageUrl} style={{ width: '50px', borderRadius: '100%' }} alt="" />
+                            }
+                        </div>
                     </div>
 
                 </div>

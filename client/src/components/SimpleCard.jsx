@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import DeletePlanBtn from './DeletePlanBtn';
 import { useState, useEffect } from 'react';
 import { PlanContext } from '../contexts/PlanContext';
+import { AuthContext } from '../contexts/AuthContext';
 
 const useStyles = makeStyles({
     root: {
@@ -29,7 +30,9 @@ const useStyles = makeStyles({
 });
 
 export default function SimpleCard({ plan, sno }) {
-    const {topics} =  useContext(PlanContext).state
+
+    const { user } = useContext(AuthContext).state
+    const { topics } = useContext(PlanContext).state
     const [progress, setProgress] = useState(null)
     const [filteredTopics, setFilteredTopics] = useState([])
     const classes = useStyles();
@@ -38,15 +41,15 @@ export default function SimpleCard({ plan, sno }) {
         setFilteredTopics(topics.filter(topic => topic.planID === plan._id))
     }, [plan, topics])
 
-    
+
     useEffect(() => {
         const completed = filteredTopics.filter(x => x.completed === true).length
         const total = filteredTopics.length
         const now = Math.floor((completed / total) * 100)
         setProgress(now)
     }, [plan, topics, filteredTopics])
-    
-   
+
+
 
     return (
         <div>
@@ -56,7 +59,13 @@ export default function SimpleCard({ plan, sno }) {
 
                     <div className={`${classes.title} d-flex justify-content-between text-secondary `} gutterbottom='true'>
                         {sno}
-                        <div  ><DeletePlanBtn id={plan._id} title={plan.title} /></div>
+                        <div>
+                            {
+                                plan.author.email === user.email ? <DeletePlanBtn id={plan._id} title={plan.title} />: <span style={{
+                                    fontSize: '12px'
+                                }} >Shared by: {plan.author.givenName}</span>
+                            }
+                        </div>
                     </div>
 
                     <Link className='text-decoration-none text-dark' to={`/plan/${plan._id}`}  >

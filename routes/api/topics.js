@@ -4,7 +4,11 @@ const Topic = require('../../models/Topic')
 
 router.get('/', async (req, res) => {
     try {
-        const topics = await Topic.find().select('planID completed')
+        const {q} = req.query
+        const ids = q.split(',')
+        const topics = await Topic.find({
+            planID: {$in: ids}
+        }).select('planID completed')
         if (!topics) throw Error('no content!')
         res.status(200).json(topics)
     }
