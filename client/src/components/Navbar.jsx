@@ -21,7 +21,7 @@ function Navbar() {
 
                     <div className="text-center d-flex">
                         <Icon para={1} />
-                        <Link to='/' className='brand-logo text-decoration-none text-light ms-3'> Ninja Worklist</Link>
+                        <Link to='/' className='brand-logo text-decoration-none text-light ms-2 text-center my-auto'> Ninja Worklist</Link>
                     </div>
 
                     <div className='my-auto' >

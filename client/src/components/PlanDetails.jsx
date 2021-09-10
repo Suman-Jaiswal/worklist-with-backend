@@ -5,10 +5,12 @@ import DeleteTopicBtn from './DeleteTopicBtn';
 import AddTopicBtn from './AddTopicBtn';
 import { AuthContext } from '../contexts/AuthContext';
 import { PlanContext } from '../contexts/PlanContext';
+import ShareBtn from './ShareBtn';
+import Collaborators from './Collaborators';
 
 export default function PlanDetails() {
-    
-    const {topics} = useContext(PlanContext).state
+
+    const { topics } = useContext(PlanContext).state
     const { user, loading, authorised } = useContext(AuthContext).state
     const { id } = useParams()
     const [topicsR, setTopicsR] = useState([])
@@ -25,7 +27,7 @@ export default function PlanDetails() {
             .then(res => {
                 setToggle(!toggle)
                 const array = [...topicsR]
-                array[i] = {...array[i], completed: !topic.completed}
+                array[i] = { ...array[i], completed: !topic.completed }
                 setTopicsR(array)
             })
             .catch(e => console.log(e))
@@ -50,11 +52,11 @@ export default function PlanDetails() {
                     .catch(err => console.log(err))
             }
             else {
-                setAccess(false)   
+                setAccess(false)
                 setpageLoading(loading)
             }
         }
-      
+
     }, [id, user, loading, authorised])
 
     useEffect(() => {
@@ -70,14 +72,14 @@ export default function PlanDetails() {
             {
                 pageLoading ? <h4 className='text-secondary text-center pt-5'>Loading...</h4> : access ?
                     <div >
-
-                        <div className="display-6 px-3 " >
-                            {plan && plan.title}
+                        <div className="py-1 px-3 d-flex justify-content-between" >
+                            <span className="display-6 text-secondary">  {plan && plan.title}</span>
+                            <span className='' ><Collaborators collaborators={plan.collaborators} />{' '}<ShareBtn plan={plan} setPlan={setPlan} /> </span>
                         </div>
 
-                        <div className="py-1 px-3 d-flex justify-content-between" style={{ borderBottom: '0.5px solid #dddddd' }} >
+                        <div className="py-1 px-3 d-flex text-secondary justify-content-between" style={{ borderBottom: '0.5px solid #dddddd' }} >
                             <span> {'('} {plan && plan.description} {')'}</span>
-                            <span className='' > {' Topics: '} {topicsR ? topicsR.length : 0}</span>
+                            <span className='me-2' > {' Topics: '} {topicsR ? topicsR.length : 0}</span>
                         </div>
 
                         <div className="container pt-3"> <AddTopicBtn variant={'outline-primary'} color={''} planID={id} /></div>
@@ -88,7 +90,7 @@ export default function PlanDetails() {
                                 {
                                     topicsR ? topicsR.map((topic, i) => <div key={i} className="item">
                                         {` ${i + 1}. `}  <input type="checkbox" onChange={() => handleCheck(topic, i)} checked={topic.completed} />
-                                        <p className='topic-name'> {topic.title}</p> <DeleteTopicBtn title={topic.title} id={topic._id} />
+                                        <p className='topic-name text-secondary'> {topic.title}</p> <DeleteTopicBtn title={topic.title} id={topic._id} />
                                     </div>) : null
                                 }
                             </div>

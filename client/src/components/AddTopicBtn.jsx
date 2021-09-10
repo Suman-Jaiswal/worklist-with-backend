@@ -41,7 +41,7 @@ export default function AddTopicBtn({ variant, color, planID }) {
                 <FontAwesomeIcon icon={faPlus} size='sm' /> <span className='ms-1 create-text'>Add Topic</span>
             </Button>
 
-            <Modal size="lg" show={open} onHide={closeModal} >
+            <Modal show={open} onHide={closeModal} >
 
                 <Form onSubmit={handleSubmit} >
 
