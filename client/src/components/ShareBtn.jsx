@@ -5,7 +5,7 @@ import React, { useContext, useState } from 'react'
 import { Button, Form, Modal } from 'react-bootstrap'
 import { PlanContext } from '../contexts/PlanContext'
 
-export default function ShareBtn({ plan, setPlan }) {
+export default function ShareBtn({ plan, setPlan, textClass }) {
     
     const { dispatch } = useContext(PlanContext)
     const [open, setOpen] = useState(false)
@@ -41,7 +41,7 @@ export default function ShareBtn({ plan, setPlan }) {
     return (
         <>
             <Button variant={'transparent'} className={'text-secondary'} onClick={openModal} size='sm' aria-labelledby="contained-modal-title-vcenter" >
-                <FontAwesomeIcon icon={faShare} size='sm' /> <span className='ms-1 create-text'>Share</span>
+                <FontAwesomeIcon icon={faShare} size='sm' /> <span className={`ms-1 ${textClass}`}>Share</span>
             </Button>
 
             <Modal show={open} onHide={closeModal} >

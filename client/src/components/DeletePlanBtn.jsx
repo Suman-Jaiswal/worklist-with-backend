@@ -7,7 +7,7 @@ import { Button } from 'react-bootstrap'
 import axios from 'axios'
 
 
-export default function DeletePlanBtn({ title, id }) {
+export default function DeletePlanBtn({ title, id, textClass }) {
 
     const [open, setOpen] = useState(false)
     const { dispatch } = useContext(PlanContext)
@@ -41,7 +41,7 @@ export default function DeletePlanBtn({ title, id }) {
     return (
         <div>
             <Button variant={'transparent'} className={'text-danger'} onClick={openModal} size='sm' aria-labelledby="contained-modal-title-vcenter" >
-                <FontAwesomeIcon size='sm' icon={faTrash} /><span className='ms-1 create-text'>Delete</span>
+                <FontAwesomeIcon size='sm' icon={faTrash} /><span className={`ms-1 ${textClass}`}>Delete</span>
             </Button>
 
 

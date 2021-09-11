@@ -1,4 +1,3 @@
-import { AppBar } from '@material-ui/core'
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../contexts/AuthContext'
@@ -13,7 +12,7 @@ function Navbar() {
     const { user } = state
 
     return (
-        <AppBar position='static'>
+        <div position='static'>
 
             <nav className="nav-wrapper bg-secondary py-2">
 
@@ -43,7 +42,7 @@ function Navbar() {
 
             </nav>
 
-        </AppBar>
+        </div>
     )
 }
 

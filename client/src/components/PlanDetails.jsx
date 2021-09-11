@@ -77,9 +77,9 @@ export default function PlanDetails() {
                              <div  className="py-1 px-3 d-flex justify-content-between" >
                             <span className="lead fw-bold text-secondary">  {plan && plan.title}</span>
                             <span className='' >
-                                <Collaborators collaborators={plan.collaborators} plan={plan} setPlan={setPlan} />
-                                <EditPlanBtn  plan={plan} setPlan={setPlan} />
-                                <ShareBtn setPlan={setPlan} plan={plan} />
+                                <Collaborators  collaborators={plan.collaborators} plan={plan} setPlan={setPlan} />
+                                <EditPlanBtn textClass={'create-text'}  plan={plan} setPlan={setPlan} />
+                                <ShareBtn textClass={'create-text'} setPlan={setPlan} plan={plan} />
                             </span>
                         </div>
 
@@ -97,7 +97,7 @@ export default function PlanDetails() {
                             <div className="inbox">
                                 {
                                     topicsR ? topicsR.map((topic, i) => <div key={i} className="item">
-                                        {` ${i + 1}. `}  <input type="checkbox" onChange={() => handleCheck(topic, i)} checked={topic.completed} />
+                                        {`${i + 1}. `}  <input type="checkbox" onChange={() => handleCheck(topic, i)} checked={topic.completed} />
                                         <p className='topic-name text-secondary'> {topic.title}</p> <DeleteTopicBtn title={topic.title} id={topic._id} />
                                     </div>) : null
                                 }

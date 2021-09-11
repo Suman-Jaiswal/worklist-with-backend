@@ -5,7 +5,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Button, Form, Modal } from 'react-bootstrap'
 import { PlanContext } from '../contexts/PlanContext'
 
-export default function EditPlanBtn({ plan, setPlan }) {
+export default function EditPlanBtn({ plan, setPlan, textClass }) {
   
     const { dispatch } = useContext(PlanContext)
     const [open, setOpen] = useState(false)
@@ -49,7 +49,7 @@ export default function EditPlanBtn({ plan, setPlan }) {
     return (
         <>
             <Button variant={'transparent'} className={'text-secondary'} onClick={openModal} size='sm' aria-labelledby="contained-modal-title-vcenter" >
-                <FontAwesomeIcon icon={faPen} size='sm' /> <span className='ms-1 create-text'>Edit Plan</span>
+                <FontAwesomeIcon icon={faPen} size='sm' /> <span className={`ms-1 ${textClass}`}>Edit Plan</span>
             </Button>
 
             <Modal show={open} onHide={closeModal} >
