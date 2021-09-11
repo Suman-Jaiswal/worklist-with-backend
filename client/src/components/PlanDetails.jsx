@@ -90,7 +90,7 @@ export default function PlanDetails() {
                         </div>
                        
 
-                        <div className="container pt-3"> <AddTopicBtn variant={'outline-primary'} color={''} planID={id} /></div>
+                        <div className="container pt-3"> <AddTopicBtn variant={'transparent-primary'} color={'text-primary'} planID={id} /></div>
 
                         <div className="container my-2">
 
