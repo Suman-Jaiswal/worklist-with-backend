@@ -64,24 +64,25 @@ export default function SimpleCard({ plan, sno }) {
                     <div className={`${classes.title} d-flex justify-content-between text-secondary `} gutterbottom='true'>
                         {sno}
                         <div>
-                            <Dropdown >
-                                <Dropdown.Toggle variant="transparent" id="dropdown-basic">
-                                    <FontAwesomeIcon className='mb-2 text-secondary' icon={faEllipsisH} />
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu >
-                                    <div> <EditPlanBtn plan={plan} /></div>
-                                    <div> <ShareBtn plan={plan} /></div>
-                                    <div>
-                                        {
-                                            plan.author.email === user.email && <DeletePlanBtn id={plan._id} title={plan.title} />
-                                        }
-                                    </div>
+                            {
+                                plan.author.email === user.email ?
+                                    <Dropdown >
+                                        <Dropdown.Toggle variant="transparent" id="dropdown-basic">
+                                            <FontAwesomeIcon className='mb-2 text-secondary' icon={faEllipsisH} />
+                                        </Dropdown.Toggle>
+                                        <Dropdown.Menu >
+                                            <div> <EditPlanBtn plan={plan} /></div>
+                                            <div> <ShareBtn plan={plan} /></div>
+                                            <div>
+                                                {
+                                                    plan.author.email === user.email && <DeletePlanBtn id={plan._id} title={plan.title} />
+                                                }
+                                            </div>
 
-
-
-                                </Dropdown.Menu>
-                            </Dropdown>
-
+                                        </Dropdown.Menu>
+                                    </Dropdown> :
+                                    <div style={{fontSize: '16px'}} className="text-secondary fw-bold">shared by: {plan.author.givenName}</div>
+                            }
                         </div>
                     </div>
 
