@@ -69,11 +69,16 @@ export default function SimpleCard({ plan, sno }) {
                                     <FontAwesomeIcon className='mb-2 text-secondary' icon={faEllipsisH} />
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu >
-                                    <EditPlanBtn plan={plan} />
-                                    <ShareBtn plan={plan} />
-                                    {
-                                        plan.author.email === user.email && <DeletePlanBtn id={plan._id} title={plan.title} />
-                                    }
+                                    <div> <EditPlanBtn plan={plan} /></div>
+                                    <div> <ShareBtn plan={plan} /></div>
+                                    <div>
+                                        {
+                                            plan.author.email === user.email && <DeletePlanBtn id={plan._id} title={plan.title} />
+                                        }
+                                    </div>
+
+
+
                                 </Dropdown.Menu>
                             </Dropdown>
 
