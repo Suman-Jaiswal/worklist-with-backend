@@ -85,7 +85,7 @@ export default function PlanDetails() {
 
                         <div style={{ borderBottom: '0.5px solid #dddddd'}} className="py-1 px-3 d-flex text-secondary justify-content-between" >
                             <span style={{width: '70%', fontSize: '13px' }} > {plan && plan.description} </span>
-                            <span  style={{ fontSize: '13px' }} className='me-2' > {' Topics: '} {topicsR ? topicsR.length : 0}</span>
+                            <span  style={{ fontSize: '13px' }} className='me-2' > {' Topics: '} {topicsR.length > 0 && topicsR.length}</span>
                         </div>
                         </div>
                        

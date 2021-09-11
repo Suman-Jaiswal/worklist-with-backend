@@ -1,4 +1,4 @@
-import { faPeopleArrows, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
+import { faTimesCircle, faUsers } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios'
 import React, { useContext, useState } from 'react'
@@ -35,14 +35,14 @@ export default function Collaborators({ collaborators, plan, setPlan }) {
     return (
         <>
             <Button variant={'transparent'} className={'text-secondary'} onClick={openModal} size='sm' aria-labelledby="contained-modal-title-vcenter" >
-                <FontAwesomeIcon icon={faPeopleArrows} size='sm' /> <span className='ms-1 create-text'>Collaborators</span>
+                <FontAwesomeIcon icon={faUsers} size='sm' /> <span className='ms-1 create-text'>Collaborators</span>
             </Button>
 
             <Modal size="sm" show={open} onHide={closeModal} >
 
                 <Modal.Header className='text-center' closeButton >
                     <div className='m-auto bold lead-2' >
-                        <FontAwesomeIcon icon={faPeopleArrows} />  Collaborators
+                        <FontAwesomeIcon icon={faUsers} />  Collaborators
                     </div>
                 </Modal.Header>
 

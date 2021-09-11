@@ -1,4 +1,4 @@
-import { faShare } from '@fortawesome/free-solid-svg-icons'
+import { faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios'
 import React, { useContext, useState } from 'react'
@@ -41,7 +41,7 @@ export default function ShareBtn({ plan, setPlan, textClass }) {
     return (
         <>
             <Button variant={'transparent'} className={'text-secondary'} onClick={openModal} size='sm' aria-labelledby="contained-modal-title-vcenter" >
-                <FontAwesomeIcon icon={faShare} size='sm' /> <span className={`ms-1 ${textClass}`}>Share</span>
+                <FontAwesomeIcon icon={faUserPlus} size='sm' /> <span className={`ms-1 ${textClass}`}>Share</span>
             </Button>
 
             <Modal show={open} onHide={closeModal} >

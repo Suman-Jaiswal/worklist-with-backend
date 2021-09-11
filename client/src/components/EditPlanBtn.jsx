@@ -58,7 +58,7 @@ export default function EditPlanBtn({ plan, setPlan, textClass }) {
 
                     <Modal.Header className='text-center' closeButton >
                         <div className='m-auto bold display-6' >
-                            Edit Topic
+                            Edit Plan
                         </div>
                     </Modal.Header>
 
