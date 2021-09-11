@@ -66,13 +66,23 @@ router.delete('/:id', async (req, res) => {
     }
 })
 
+router.put('/:id', (req, res) => {
+    const { title, description } = req.body
+    Plan.findByIdAndUpdate(req.params.id, { title, description }, { new: true }, (err, doc) => {
+        if (err) res.status(400).json({
+            msg: err.message
+        })
+        else res.status(200).json(doc)
+    })
+})
+
 router.put('/share/:id', async (req, res) => {
     try {
-        const plan = await Plan.findOneAndUpdate({ _id: req.params.id }, req.body)
-        if (!plan) throw Error('something went wrong while adding collaborator')
-
-        res.header("Access-Control-Allow-Origin", "*");
-        res.status(200).json(plan)
+        const { collaborators } = req.body
+        Plan.findByIdAndUpdate(req.params.id, { collaborators }, { new: true }, (err, doc) => {
+            if (err) throw Error('Something went wrong while adding collaborator')
+            else res.status(200).json(doc)
+        })
     }
     catch (e) {
         res.status(400).json({

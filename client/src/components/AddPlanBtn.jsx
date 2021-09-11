@@ -89,7 +89,7 @@ export default function AddPlanBtn({ variant, color }) {
 
                     <Modal.Body>
                         <Form.Label>Title</Form.Label>
-                        <Form.Control className='mb-4' onChange={(e) => setTitle(e.target.value)} placeholder={'Title'} />
+                        <Form.Control required className='mb-4' onChange={(e) => setTitle(e.target.value)} placeholder={'Title'} />
                         <Form.Label>Description</Form.Label>
                         <Form.Control className='mb-4' onChange={(e) => setDescription(e.target.value)} placeholder={'Description'} />
                         <Form.Label>Topics</Form.Label>

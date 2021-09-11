@@ -15,7 +15,7 @@ function Navbar() {
     return (
         <AppBar position='static'>
 
-            <nav className="nav-wrapper py-2">
+            <nav className="nav-wrapper bg-secondary py-2">
 
                 <div className="container justify-content-between d-flex">
 

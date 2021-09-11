@@ -15,13 +15,17 @@ export const planReducer = (state, action) => {
                 ...state,
                 topics: [...state.topics, ...action.payload],
             }
+
         case 'UPDATE_PLANS':
             const rawObj = {...state}
             const rawPlans = rawObj.plans
-            rawPlans.filter(x => x._id === action.payload._id)[0] = action.payload.payload
+
+            const index = rawPlans.findIndex(x => x._id === action.payload._id)
+            rawPlans[index] = action.payload
+        
             return {
                 ...state,
-                topics: rawPlans
+                plans: rawPlans
             }
 
         case 'DELETE_PLAN':

@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Footer() {
     return (
-        <div className='footer' style={{ background: "#000", textAlign: "center", padding: "15px", width: '100%' }}>
+        <div className='footer bg-secondary' style={{ textAlign: "center", padding: "15px", width: '100%' }}>
 
             <p className="cp-text">
                 Developed by: Suman Jaiswal © Copyright 2021 Ninja Worklist.

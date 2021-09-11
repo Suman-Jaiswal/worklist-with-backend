@@ -8,6 +8,7 @@ import axios from 'axios'
 import { AuthContext } from '../contexts/AuthContext'
 
 export default function Dashboard() {
+    
     const [pageLoading, setpageLoading] = useState(true)
     const { state, dispatch } = useContext(PlanContext)
     const { user, loading, authorised } = useContext(AuthContext).state

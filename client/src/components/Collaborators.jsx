@@ -1,10 +1,13 @@
-import { faPeopleArrows } from '@fortawesome/free-solid-svg-icons'
+import { faPeopleArrows, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useState } from 'react'
+import axios from 'axios'
+import React, { useContext, useState } from 'react'
 import { Button, ListGroup, Modal } from 'react-bootstrap'
+import { PlanContext } from '../contexts/PlanContext'
 
-export default function Collaborators({ collaborators }) {
+export default function Collaborators({ collaborators, plan, setPlan }) {
 
+    const { dispatch } = useContext(PlanContext)
     const [open, setOpen] = useState(false)
 
     const openModal = () => {
@@ -13,6 +16,22 @@ export default function Collaborators({ collaborators }) {
     const closeModal = () => {
         setOpen(false)
     }
+
+    const removeCollaborator = (email) => {
+        const raw = [...plan.collaborators]
+        const newCollaborators = raw.filter(x => x !== email)
+
+        axios.put(`/api/plans/share/${plan._id}`, {
+            collaborators: newCollaborators
+        })
+            .then(res => {
+                const updatedPlan = res.data
+                setPlan(updatedPlan)
+                dispatch({ type: 'UPDATE_PLANS', payload: updatedPlan })
+            })
+            .catch(err => console.log(err))
+    }
+
     return (
         <>
             <Button variant={'transparent'} className={'text-secondary'} onClick={openModal} size='sm' aria-labelledby="contained-modal-title-vcenter" >
@@ -23,7 +42,7 @@ export default function Collaborators({ collaborators }) {
 
                 <Modal.Header className='text-center' closeButton >
                     <div className='m-auto bold lead-2' >
-                    <FontAwesomeIcon icon={faPeopleArrows}  />  Collaborators
+                        <FontAwesomeIcon icon={faPeopleArrows} />  Collaborators
                     </div>
                 </Modal.Header>
 
@@ -31,7 +50,14 @@ export default function Collaborators({ collaborators }) {
                     <ListGroup>
                         {
                             collaborators.map((c, i) =>
-                                <ListGroup.Item key={i} >{c}</ListGroup.Item>
+                                <ListGroup.Item key={i} >{c}
+                                    {
+                                        plan.author.email !== c && <span style={{ float: 'right' }} >
+                                            <Button size='sm' variant='transparent' onClick={() => removeCollaborator(c)}> <FontAwesomeIcon icon={faTimesCircle} /> </Button>
+                                        </span>
+                                    }
+
+                                </ListGroup.Item>
                             )
                         }
                     </ListGroup>

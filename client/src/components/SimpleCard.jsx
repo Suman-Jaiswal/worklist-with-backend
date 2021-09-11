@@ -3,12 +3,16 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import { ProgressBar } from 'react-bootstrap';
+import { Dropdown, ProgressBar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import DeletePlanBtn from './DeletePlanBtn';
 import { useState, useEffect } from 'react';
 import { PlanContext } from '../contexts/PlanContext';
 import { AuthContext } from '../contexts/AuthContext';
+import EditPlanBtn from './EditPlanBtn';
+import ShareBtn from './ShareBtn';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 
 const useStyles = makeStyles({
     root: {
@@ -60,11 +64,19 @@ export default function SimpleCard({ plan, sno }) {
                     <div className={`${classes.title} d-flex justify-content-between text-secondary `} gutterbottom='true'>
                         {sno}
                         <div>
-                            {
-                                plan.author.email === user.email ? <DeletePlanBtn id={plan._id} title={plan.title} />: <span style={{
-                                    fontSize: '12px'
-                                }} >Shared by: {plan.author.givenName}</span>
-                            }
+                            <Dropdown >
+                                <Dropdown.Toggle variant="transparent" id="dropdown-basic">
+                                    <FontAwesomeIcon className='mb-2 text-secondary' icon={faEllipsisH} />
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu >
+                                    <EditPlanBtn plan={plan} />
+                                    <ShareBtn plan={plan} />
+                                    {
+                                        plan.author.email === user.email && <DeletePlanBtn id={plan._id} title={plan.title} />
+                                    }
+                                </Dropdown.Menu>
+                            </Dropdown>
+
                         </div>
                     </div>
 

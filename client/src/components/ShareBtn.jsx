@@ -1,11 +1,13 @@
 import { faShare } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Button, Form, Modal } from 'react-bootstrap'
+import { PlanContext } from '../contexts/PlanContext'
 
 export default function ShareBtn({ plan, setPlan }) {
-    // const { dispatch } = useContext(PlanContext)
+    
+    const { dispatch } = useContext(PlanContext)
     const [open, setOpen] = useState(false)
     const [email, setEmail] = useState('')
 
@@ -25,15 +27,12 @@ export default function ShareBtn({ plan, setPlan }) {
         }
 
         axios.put(`/api/plans/share/${plan._id}`, {
-            ...plan,
             collaborators: [...plan.collaborators, email]
         })
             .then(res => {
-                setPlan({
-                    ...plan,
-                    collaborators: [...plan.collaborators, email]
-                })
-                // dispatch({ type: 'UPDATE_PLANS', payload: res.data })
+                const updatedPlan = res.data
+                setPlan(updatedPlan)
+                dispatch({ type: 'UPDATE_PLANS', payload: updatedPlan })
             })
             .catch(err => console.log(err))
 

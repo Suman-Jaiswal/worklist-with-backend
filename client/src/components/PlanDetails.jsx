@@ -7,6 +7,7 @@ import { AuthContext } from '../contexts/AuthContext';
 import { PlanContext } from '../contexts/PlanContext';
 import ShareBtn from './ShareBtn';
 import Collaborators from './Collaborators';
+import EditPlanBtn from './EditPlanBtn';
 
 export default function PlanDetails() {
 
@@ -72,15 +73,22 @@ export default function PlanDetails() {
             {
                 pageLoading ? <h4 className='text-secondary text-center pt-5'>Loading...</h4> : access ?
                     <div >
-                        <div className="py-1 px-3 d-flex justify-content-between" >
-                            <span className="display-6 text-secondary">  {plan && plan.title}</span>
-                            <span className='' ><Collaborators collaborators={plan.collaborators} />{' '}<ShareBtn plan={plan} setPlan={setPlan} /> </span>
+                        <div className="sticky-top bg-light">
+                             <div  className="py-1 px-3 d-flex justify-content-between" >
+                            <span className="lead fw-bold text-secondary">  {plan && plan.title}</span>
+                            <span className='' >
+                                <Collaborators collaborators={plan.collaborators} plan={plan} setPlan={setPlan} />
+                                <EditPlanBtn  plan={plan} setPlan={setPlan} />
+                                <ShareBtn setPlan={setPlan} plan={plan} />
+                            </span>
                         </div>
 
-                        <div className="py-1 px-3 d-flex text-secondary justify-content-between" style={{ borderBottom: '0.5px solid #dddddd' }} >
-                            <span> {'('} {plan && plan.description} {')'}</span>
-                            <span className='me-2' > {' Topics: '} {topicsR ? topicsR.length : 0}</span>
+                        <div style={{ borderBottom: '0.5px solid #dddddd'}} className="py-1 px-3 d-flex text-secondary justify-content-between" >
+                            <span style={{width: '70%', fontSize: '13px' }} > {plan && plan.description} </span>
+                            <span  style={{ fontSize: '13px' }} className='me-2' > {' Topics: '} {topicsR ? topicsR.length : 0}</span>
                         </div>
+                        </div>
+                       
 
                         <div className="container pt-3"> <AddTopicBtn variant={'outline-primary'} color={''} planID={id} /></div>
 

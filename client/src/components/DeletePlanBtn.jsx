@@ -20,27 +20,30 @@ export default function DeletePlanBtn({ title, id }) {
     }
     const handleDelete = () => {
         axios.delete(`/api/plans/${id}`)
-        .then(res => {
-            console.log('Plan deleted', res.data)
-            dispatch({ type: 'DELETE_PLAN', id })
-        })
-        .catch(err => {
-            console.log(err)
-        })
+            .then(res => {
+                console.log('Plan deleted', res.data)
+                dispatch({ type: 'DELETE_PLAN', id })
+            })
+            .catch(err => {
+                console.log(err)
+            })
         axios.delete(`/api/topics/${id}`)
-        .then(res => {
-            console.log('Topics deleted', res.data)
-        })
-        .catch(err => {
-            console.log(err)
-        })
+            .then(res => {
+                console.log('Topics deleted', res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
         setOpen(false)
-       
+
     }
 
     return (
-        <>
-            <FontAwesomeIcon className='text-danger' style={{ cursor: 'pointer' }} onClick={openModal} icon={faTrash} />
+        <div>
+            <Button variant={'transparent'} className={'text-danger'} onClick={openModal} size='sm' aria-labelledby="contained-modal-title-vcenter" >
+                <FontAwesomeIcon size='sm' icon={faTrash} /><span className='ms-1 create-text'>Delete</span>
+            </Button>
+
 
             <Modal show={open} onHide={closeModal}>
 
@@ -54,6 +57,6 @@ export default function DeletePlanBtn({ title, id }) {
                 </Modal.Body>
 
             </Modal>
-        </>
+        </div>
     )
 }
