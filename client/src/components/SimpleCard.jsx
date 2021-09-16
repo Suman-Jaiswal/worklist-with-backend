@@ -97,7 +97,7 @@ export default function SimpleCard({ plan, sno }) {
                         </Typography>
 
                         <Typography className={classes.pos} color="textSecondary">
-                            {' Topics: '} {filteredTopics.length}
+                            {' Topics: '} {filteredTopics.length} {', '+ filteredTopics.filter(x => x.completed === true).length+' left'}
                         </Typography>
 
                         <div className='py-1' >
