@@ -12,7 +12,7 @@ import { AuthContext } from '../contexts/AuthContext';
 import EditPlanBtn from './EditPlanBtn';
 import ShareBtn from './ShareBtn';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle, faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 
 const useStyles = makeStyles({
     root: {
@@ -25,11 +25,12 @@ const useStyles = makeStyles({
         transform: 'scale(0.8)',
     },
     title: {
-        fontSize: 18,
+        fontSize: 15,
         fontWeight: 'bold',
     },
     pos: {
         marginBottom: 12,
+        fontSize: '14px'
     },
 });
 
@@ -59,15 +60,15 @@ export default function SimpleCard({ plan, sno }) {
         <div>
             <Card className={classes.root}>
 
-                <CardContent className='px-3'>
+                <CardContent className='p-3'>
 
-                    <div className={`${classes.title} d-flex justify-content-between text-secondary `} gutterbottom='true'>
+                    <div className={`${classes.title} d-flex justify-content-between text-secondary `}>
                         {sno}
                         <div>
                             {
                                 plan.author.email === user.email ?
                                     <Dropdown >
-                                        <Dropdown.Toggle variant="transparent" id="dropdown-basic">
+                                        <Dropdown.Toggle className='p-0' size='sm' variant="transparent" id="dropdown-basic">
                                             <FontAwesomeIcon className='mb-2 text-secondary' icon={faEllipsisH} />
                                         </Dropdown.Toggle>
                                         <Dropdown.Menu >
@@ -81,14 +82,14 @@ export default function SimpleCard({ plan, sno }) {
 
                                         </Dropdown.Menu>
                                     </Dropdown> :
-                                    <div style={{fontSize: '16px'}} className="text-secondary fw-bold">shared by: {plan.author.givenName}</div>
+                                    <div style={{ fontSize: '16px' }} className="text-secondary fw-bold">shared by: {plan.author.givenName}</div>
                             }
                         </div>
                     </div>
 
                     <Link className='text-decoration-none text-dark' to={`/plan/${plan._id}`}  >
 
-                        <Typography variant="h5" component="h2">
+                        <Typography variant="h6">
                             {plan.title}
                         </Typography>
 
@@ -97,7 +98,12 @@ export default function SimpleCard({ plan, sno }) {
                         </Typography>
 
                         <Typography className={classes.pos} color="textSecondary">
-                            {' Topics: '} {filteredTopics.length} {', '+ filteredTopics.filter(x => x.completed === true).length+' left'}
+                            {' Topics: '} {filteredTopics.length},
+                            <span className='text-danger' style={{float: 'right'}} >
+                               {
+                               progress===100? <FontAwesomeIcon size='lg' icon={faCheckCircle} className='text-success'/> : ' left: ' + filteredTopics.filter(x => x.completed===false).length
+                               }
+                            </span>
                         </Typography>
 
                         <div className='py-1' >
