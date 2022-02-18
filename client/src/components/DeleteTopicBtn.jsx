@@ -20,19 +20,19 @@ export default function DeleteTopicBtn({ title, id }) {
     }
     const handleDelete = () => {
         axios.delete(`/api/topics/topic/${id}`)
-        .then(res => {
-            console.log('Topic deleted', res.data)
-            dispatch({ type: 'DELETE_TOPIC', id })
-        })
-        .catch(err => {
-            console.log(err)
-        })
+            .then(res => {
+                console.log('Topic deleted', res.data)
+                dispatch({ type: 'DELETE_TOPIC', id })
+            })
+            .catch(err => {
+                console.log(err)
+            })
         setOpen(false)
     }
 
     return (
         <>
-            <FontAwesomeIcon size='sm' className='text-danger' style={{ cursor: 'pointer' }} onClick={openModal} icon={faTrash} />
+            <FontAwesomeIcon size='sm' className='text-danger ms-3' style={{ cursor: 'pointer' }} onClick={openModal} icon={faTrash} />
 
             <Modal show={open} onHide={closeModal}>
 

@@ -39,10 +39,10 @@ export default function AddTopicBtn({ variant, color, planID }) {
         axios.post(`/api/topics/${planID}`, {
             topics
         })
-        .then(res => {
-            dispatch({ type: 'ADD_TOPICS', payload: res.data })
-        })
-        .catch(err => console.log(err))
+            .then(res => {
+                dispatch({ type: 'ADD_TOPICS', payload: res.data })
+            })
+            .catch(err => console.log(err))
 
         setInput('')
         setTopics([])
@@ -50,8 +50,8 @@ export default function AddTopicBtn({ variant, color, planID }) {
 
     return (
         <>
-            <Button variant={variant} className={color} onClick={openModal}  size='sm'  aria-labelledby="contained-modal-title-vcenter" >
-                <FontAwesomeIcon icon={faPlus} size='sm' /> <span className='ms-1 create-text'>Add Topics</span>
+            <Button variant={variant} className={color} onClick={openModal} size='sm' aria-labelledby="contained-modal-title-vcenter" >
+                <FontAwesomeIcon icon={faPlus} size='sm' /> <span className='ms-1'>Add Topics</span>
             </Button>
 
             <Modal show={open} onHide={closeModal} >
@@ -71,7 +71,7 @@ export default function AddTopicBtn({ variant, color, planID }) {
                     </Modal.Body>
 
                     <Modal.Footer>
-                        <Button type='submit' >Add</Button>
+                        <Button size='sm' type='submit' >Add</Button>
                     </Modal.Footer>
 
                 </Form>

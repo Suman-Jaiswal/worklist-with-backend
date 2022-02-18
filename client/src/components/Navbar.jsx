@@ -12,37 +12,40 @@ function Navbar() {
     const { user } = state
 
     return (
-        <div position='static'>
+        <>
+            <div>
 
-            <nav className="nav-wrapper py-2">
+                <nav className="nav-wrapper py-2">
 
-                <div className="container justify-content-between d-flex">
+                    <div className="container justify-content-between d-flex">
 
-                    <div className="text-center d-flex">
-                        <Icon para={1} />
-                        <Link to='/' className='brand-logo text-decoration-none ms-2 text-center my-auto'> Ninja Worklist</Link>
-                    </div>
-
-                    <div className='my-auto' >
-                        <AddPlanBtn variant={'success'} />
-                        {
-                            Object.entries(user).length > 0 ?
-                                <LogoutBtn />
-                                :
-                                <LoginBtn />
-                        }
-                        <div className='d-inline ms-2' >
-                            {
-                                Object.entries(user).length > 0 && <img src={user.imageUrl} style={{ width: '50px', borderRadius: '100%' }} alt="" />
-                            }
+                        <div className="text-center d-flex">
+                            <Icon para={1} />
+                            <Link to='/' className='brand-logo text-light text-decoration-none ms-2 text-center my-auto'> Ninja Worklist</Link>
                         </div>
+
+                        <div className='my-auto' >
+                            <AddPlanBtn variant={'success'} />
+                            {
+                                Object.entries(user).length > 0 ?
+                                    <LogoutBtn />
+                                    :
+                                    <LoginBtn />
+                            }
+                            <div className='d-inline ms-2' >
+                                {
+                                    Object.entries(user).length > 0 && <img src={user.imageUrl} style={{ width: '50px', borderRadius: '100%' }} alt="" />
+                                }
+                            </div>
+                        </div>
+
                     </div>
 
-                </div>
+                </nav>
 
-            </nav>
+            </div>
+        </>
 
-        </div>
     )
 }
 

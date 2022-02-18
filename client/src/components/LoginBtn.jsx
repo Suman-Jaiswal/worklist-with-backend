@@ -19,15 +19,15 @@ export default function LoginBtn() {
 
     return (
         <GoogleLogin
-        clientId={CLIENT_ID}
-        render={props => (
-            <Button className='ms-2' onClick={props.onClick} disabled={props.disabled}>Login</Button>
-        )}
-        onSuccess={onLoginSuccess}
-        onFailure={onFailure}
-        isSignedIn={true}
-        cookiePolicy={'single_host_origin'}
-        onAutoLoadFinished={() => dispatch({type: 'LOADING', payload: false})}
-    />
+            clientId={CLIENT_ID}
+            render={props => (
+                <Button size='sm' className='ms-2' onClick={props.onClick} disabled={props.disabled}>Login</Button>
+            )}
+            onSuccess={onLoginSuccess}
+            onFailure={onFailure}
+            isSignedIn={true}
+            cookiePolicy={'single_host_origin'}
+            onAutoLoadFinished={() => dispatch({ type: 'LOADING', payload: false })}
+        />
     )
 }

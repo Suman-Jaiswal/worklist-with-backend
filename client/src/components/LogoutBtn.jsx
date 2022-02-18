@@ -28,7 +28,7 @@ export default function LogoutBtn() {
         <GoogleLogout
             clientId={CLIENT_ID}
             render={props => (
-                <Button variant='danger' onClick={props.onClick} disabled={props.disabled} className='ms-2' aria-labelledby="contained-modal-title-vcenter" >
+                <Button size='sm' variant='danger' onClick={props.onClick} disabled={props.disabled} className='mx-2' aria-labelledby="contained-modal-title-vcenter" >
                     <FontAwesomeIcon icon={faPowerOff} size='sm' /> <span className='ms-1 create-text'>Logout</span>
                 </Button>
             )}

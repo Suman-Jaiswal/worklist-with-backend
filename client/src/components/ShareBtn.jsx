@@ -5,8 +5,8 @@ import React, { useContext, useState } from 'react'
 import { Button, Form, Modal } from 'react-bootstrap'
 import { PlanContext } from '../contexts/PlanContext'
 
-export default function ShareBtn({ plan, setPlan, textClass }) {
-    
+export default function ShareBtn({ plan, setPlan, textClass, text }) {
+
     const { dispatch } = useContext(PlanContext)
     const [open, setOpen] = useState(false)
     const [email, setEmail] = useState('')
@@ -40,7 +40,7 @@ export default function ShareBtn({ plan, setPlan, textClass }) {
     }
     return (
         <>
-            <Button variant={'transparent'} className={'text-secondary'} onClick={openModal} size='sm' aria-labelledby="contained-modal-title-vcenter" >
+            <Button size='sm' variant={'transparent'} className={text} onClick={openModal} aria-labelledby="contained-modal-title-vcenter" >
                 <FontAwesomeIcon icon={faUserPlus} size='sm' /> <span className={`ms-1 ${textClass}`}>Share</span>
             </Button>
 
@@ -60,7 +60,7 @@ export default function ShareBtn({ plan, setPlan, textClass }) {
                     </Modal.Body>
 
                     <Modal.Footer>
-                        <Button type='submit' >Add</Button>
+                        <Button size='sm' type='submit' >Add</Button>
                     </Modal.Footer>
 
                 </Form>

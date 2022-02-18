@@ -28,7 +28,7 @@
         "test": "react-scripts test",
         "eject": "react-scripts eject"
     },
-    "proxy": "http://127.0.0.1:5000",
+    "proxy": "https://ninja-worklist.herokuapp.com/",
     "eslintConfig": {
         "extends": [
             "react-app",

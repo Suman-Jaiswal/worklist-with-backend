@@ -14,7 +14,7 @@ export default function AddPlanBtn({ variant, color }) {
     const [description, setDescription] = useState('')
     const [topics, setTopics] = useState([])
     const [input, setInput] = useState('')
-    const {user} = useContext(AuthContext).state
+    const { user } = useContext(AuthContext).state
 
     const openModal = () => {
         setOpen(true)
@@ -73,8 +73,8 @@ export default function AddPlanBtn({ variant, color }) {
 
     return (
         <>
-            <Button disabled={Object.entries(user).length===0} variant={variant} className={color} onClick={openModal} aria-labelledby="contained-modal-title-vcenter" >
-                <FontAwesomeIcon icon={faPlus} size='lg' /> <span className='ms-1 create-text'>Create</span>
+            <Button size='sm' disabled={Object.entries(user).length === 0} variant={variant} className={color} onClick={openModal} aria-labelledby="contained-modal-title-vcenter" >
+                <FontAwesomeIcon icon={faPlus} size='sm' /> <span className='ms-1 create-text'>Create</span>
             </Button>
 
             <Modal size="lg" show={open} onHide={closeModal} >

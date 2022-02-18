@@ -13,7 +13,8 @@
         "dotenv": "^10.0.0",
         "express": "^4.17.1",
         "mongoose": "^6.0.4",
-        "nodemon": "^2.0.12"
+        "nodemon": "^2.0.12",
+        "react-spinners": "^0.11.0"
     },
     "scripts": {
         "server": "nodemon server.js",

@@ -5,8 +5,8 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Button, Form, Modal } from 'react-bootstrap'
 import { PlanContext } from '../contexts/PlanContext'
 
-export default function EditPlanBtn({ plan, setPlan, textClass }) {
-  
+export default function EditPlanBtn({ plan, setPlan, textClass, text }) {
+
     const { dispatch } = useContext(PlanContext)
     const [open, setOpen] = useState(false)
     const [title, setTitle] = useState('')
@@ -25,7 +25,7 @@ export default function EditPlanBtn({ plan, setPlan, textClass }) {
     }, [plan.title, plan.description, open])
 
     const handleSubmit = (e) => {
-        
+
         e.preventDefault()
         closeModal()
         if (title === plan.title && description === plan.description) {
@@ -48,7 +48,7 @@ export default function EditPlanBtn({ plan, setPlan, textClass }) {
 
     return (
         <>
-            <Button variant={'transparent'} className={'text-secondary'} onClick={openModal} size='sm' aria-labelledby="contained-modal-title-vcenter" >
+            <Button variant={'transparent'} className={text} onClick={openModal} size='sm' aria-labelledby="contained-modal-title-vcenter" >
                 <FontAwesomeIcon icon={faPen} size='sm' /> <span className={`ms-1 ${textClass}`}>Edit Plan</span>
             </Button>
 
@@ -70,7 +70,7 @@ export default function EditPlanBtn({ plan, setPlan, textClass }) {
                     </Modal.Body>
 
                     <Modal.Footer>
-                        <Button type='submit' >Save</Button>
+                        <Button size='sm' type='submit' >Save</Button>
                     </Modal.Footer>
 
                 </Form>

@@ -5,7 +5,7 @@ import React, { useContext, useState } from 'react'
 import { Button, ListGroup, Modal } from 'react-bootstrap'
 import { PlanContext } from '../contexts/PlanContext'
 
-export default function Collaborators({ collaborators, plan, setPlan }) {
+export default function Collaborators({ collaborators, plan, setPlan, text }) {
 
     const { dispatch } = useContext(PlanContext)
     const [open, setOpen] = useState(false)
@@ -34,7 +34,7 @@ export default function Collaborators({ collaborators, plan, setPlan }) {
 
     return (
         <>
-            <Button variant={'transparent'} className={'text-secondary'} onClick={openModal} size='sm' aria-labelledby="contained-modal-title-vcenter" >
+            <Button variant={'transparent'} className={text} onClick={openModal} size='sm' aria-labelledby="contained-modal-title-vcenter" >
                 <FontAwesomeIcon icon={faUsers} size='sm' /> <span className='ms-1 create-text'>Collaborators</span>
             </Button>
 

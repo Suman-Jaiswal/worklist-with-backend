@@ -17,7 +17,8 @@ import { faCheckCircle, faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 const useStyles = makeStyles({
     root: {
         width: 300,
-        padding: 0
+        padding: 0,
+        backgroundColor: '#363636'
     },
     bullet: {
         display: 'inline-block',
@@ -29,8 +30,9 @@ const useStyles = makeStyles({
         fontWeight: 'bold',
     },
     pos: {
+        marginTop: 10,
         marginBottom: 12,
-        fontSize: '14px'
+        fontSize: '13px'
     },
 });
 
@@ -62,18 +64,24 @@ export default function SimpleCard({ plan, sno }) {
 
                 <CardContent className='p-3'>
 
-                    <div className={`${classes.title} d-flex justify-content-between text-secondary `}>
-                        {sno}
+                    <div className={`${classes.title} d-flex justify-content-between  `}>
+                        <div className='text-light'>
+                            {sno}
+                        </div>
+
+                        <Typography className='text-light'>
+                            {plan.title}
+                        </Typography>
                         <div>
                             {
                                 plan.author.email === user.email ?
                                     <Dropdown >
                                         <Dropdown.Toggle className='p-0' size='sm' variant="transparent" id="dropdown-basic">
-                                            <FontAwesomeIcon className='mb-2 text-secondary' icon={faEllipsisH} />
+                                            <FontAwesomeIcon className='mb-2 text-light' icon={faEllipsisH} />
                                         </Dropdown.Toggle>
                                         <Dropdown.Menu >
-                                            <div> <EditPlanBtn plan={plan} /></div>
-                                            <div> <ShareBtn plan={plan} /></div>
+                                            <div className='text-dark'> <EditPlanBtn plan={plan} /></div>
+                                            <div className='text-dark'> <ShareBtn plan={plan} /></div>
                                             <div>
                                                 {
                                                     plan.author.email === user.email && <DeletePlanBtn id={plan._id} title={plan.title} />
@@ -82,32 +90,30 @@ export default function SimpleCard({ plan, sno }) {
 
                                         </Dropdown.Menu>
                                     </Dropdown> :
-                                    <div style={{ fontSize: '16px' }} className="text-secondary fw-bold">shared by: {plan.author.givenName}</div>
+                                    <div style={{ fontSize: '16px' }} className="text-light fw-bold">shared by: {plan.author.givenName}</div>
                             }
                         </div>
                     </div>
 
-                    <Link className='text-decoration-none text-dark' to={`/plan/${plan._id}`}  >
+                    <Link className='text-decoration-none text-light' to={`/plan/${plan._id}`}  >
 
-                        <Typography variant="h6">
-                            {plan.title}
-                        </Typography>
-
-                        <Typography className={classes.pos} color="textSecondary">
+                        <Typography className={classes.pos} color="text-light">
                             {plan.description}
                         </Typography>
 
-                        <Typography className={classes.pos} color="textSecondary">
+                        <Typography className={classes.pos} color="text-light">
                             {' Topics: '} {filteredTopics.length},
-                            <span className='text-danger' style={{float: 'right'}} >
-                               {
-                               progress===100? <FontAwesomeIcon size='lg' icon={faCheckCircle} className='text-success'/> : ' left: ' + filteredTopics.filter(x => x.completed===false).length
-                               }
+                            <span className='text-danger' style={{ float: 'right' }} >
+                                {
+                                    progress === 100 ? <FontAwesomeIcon size='lg' icon={faCheckCircle} className='text-success' /> : ' left: ' + filteredTopics.filter(x => x.completed === false).length
+                                }
                             </span>
                         </Typography>
 
-                        <div className='py-1' >
-                            <ProgressBar now={progress} label={`${progress}%`} />
+                        <div className='py-2' >
+                            <ProgressBar style={{
+                                backgroundColor: '#282828'
+                            }} now={progress} label={`${progress}%`} />
                         </div>
 
                     </Link>

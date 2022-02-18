@@ -8,6 +8,7 @@ import { PlanContext } from '../contexts/PlanContext';
 import ShareBtn from './ShareBtn';
 import Collaborators from './Collaborators';
 import EditPlanBtn from './EditPlanBtn';
+import Loader from './Loader';
 
 export default function PlanDetails() {
 
@@ -69,43 +70,45 @@ export default function PlanDetails() {
     }, [id, topics])
 
     return (
-        <div className=' my-3 container-lg' style={{ minHeight: '79vh' }}>
+        <div className=' my-3 container' style={{ height: '79vh', borderLeft: '1px solid #fff', overflowY: 'scroll' }}>
             {
-                pageLoading ? <h4 className='text-secondary text-center pt-5'>Loading...</h4> : access ?
+                pageLoading ? <div style={{
+                    marginTop: '40vh'
+                }} className='text-light text-center'><Loader /></div> : access ?
                     <div >
-                        <div className="sticky-top bg-light">
-                             <div  className="py-1 px-3 d-flex justify-content-between" >
-                            <span className="lead fw-bold text-secondary">  {plan && plan.title}</span>
-                            <span className='' >
-                                <Collaborators  collaborators={plan.collaborators} plan={plan} setPlan={setPlan} />
-                                <EditPlanBtn textClass={'create-text'}  plan={plan} setPlan={setPlan} />
-                                <ShareBtn textClass={'create-text'} setPlan={setPlan} plan={plan} />
-                            </span>
+                        <div className="sticky-top text-light" style={{ backgroundColor: '#282828' }}>
+                            <div className="pt-2 d-flex justify-content-between" >
+                                <span className="lead fw-bold text-light">  {plan && plan.title}</span>
+                                <span className='' >
+                                    <Collaborators text={'text-light'} collaborators={plan.collaborators} plan={plan} setPlan={setPlan} />
+                                    <EditPlanBtn text={'text-light'} textClass={'create-text'} plan={plan} setPlan={setPlan} />
+                                    <ShareBtn text={'text-light'} textClass={'create-text'} setPlan={setPlan} plan={plan} />
+                                </span>
+                            </div>
+
+                            <div style={{ borderBottom: '0.5px solid #dddddd' }} className=" pb-3 d-flex text-light justify-content-between" >
+                                <span style={{ width: '70%', fontSize: '13px' }} > {plan && plan.description} </span>
+                                <span style={{ fontSize: '13px' }} className='me-2' > {' Topics: '} {topicsR.length > 0 && topicsR.length}</span>
+                            </div>
                         </div>
 
-                        <div style={{ borderBottom: '0.5px solid #dddddd'}} className="py-1 px-3 d-flex text-secondary justify-content-between" >
-                            <span style={{width: '70%', fontSize: '13px' }} > {plan && plan.description} </span>
-                            <span  style={{ fontSize: '13px' }} className='me-2' > {' Topics: '} {topicsR.length > 0 && topicsR.length}</span>
-                        </div>
-                        </div>
-                       
 
-                        <div className="container pt-3"> <AddTopicBtn variant={'transparent-primary'} color={'text-primary'} planID={id} /></div>
+                        <div className="container p-0 py-3"> <AddTopicBtn variant={'outline-primary'} planID={id} /></div>
 
-                        <div className="container my-2">
+                        <div className="container p-0 my-2" style={{ backgroundColor: '#282828' }}>
 
                             <div className="inbox">
                                 {
-                                    topicsR ? topicsR.map((topic, i) => <div key={i} className="item">
+                                    topicsR ? topicsR.map((topic, i) => <div key={i} className="item text-light">
                                         {`${i + 1}. `}  <input type="checkbox" onChange={() => handleCheck(topic, i)} checked={topic.completed} />
-                                        <p className='topic-name text-secondary'> {topic.title}</p> <DeleteTopicBtn title={topic.title} id={topic._id} />
+                                        <p className=' lead topic-name text-light'> {topic.title}</p> <DeleteTopicBtn title={topic.title} id={topic._id} />
                                     </div>) : null
                                 }
                             </div>
 
                         </div>
 
-                    </div> : <h4 className='text-danger text-center pt-5'>You are not allowed to access this page, contact author of the plan! {!authorised ? 'Also make sure you are logged in.' : null} </h4>
+                    </div> : <h4 className='text-danger text-center pt-5'>You are not allowed to access this page, Contact Author! {!authorised ? 'Also make sure you are logged in.' : null} </h4>
             }
 
         </div>

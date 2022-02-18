@@ -6,9 +6,10 @@ import AddPlanBtn from './AddPlanBtn'
 import Icon from './Icon'
 import axios from 'axios'
 import { AuthContext } from '../contexts/AuthContext'
+import Loader from './Loader'
 
 export default function Dashboard() {
-    
+
     const [pageLoading, setpageLoading] = useState(true)
     const { state, dispatch } = useContext(PlanContext)
     const { user, loading, authorised } = useContext(AuthContext).state
@@ -21,9 +22,9 @@ export default function Dashboard() {
         if (!authorised) {
             return
         }
-        
+
         setpageLoading(true)
-        
+
         axios.get(`/api/plans/${user.email}`)
             .then(res => {
                 const planIds = res.data.map(a => a._id)
@@ -47,9 +48,11 @@ export default function Dashboard() {
 
 
     return (
-        <div className='d-flex flex-wrap container-lg my-5 gap-4 dashboard' style={{ minHeight: '70.2vh' }}>
+        <div className='d-flex flex-wrap align-items-start container-lg my-5 gap-4'>
             {
-                pageLoading ? <h4 className='text-secondary mx-auto'>Loading...</h4> :
+                pageLoading ? <div style={{
+                    marginTop: '35vh'
+                }} className='text-secondary mx-auto'><Loader /></div> :
                     <>
                         {
                             authorised ?
