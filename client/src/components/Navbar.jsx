@@ -13,7 +13,10 @@ function Navbar() {
 
     return (
         <>
-            <div>
+            <div style={{
+                position: 'sticky',
+                top: 0
+            }}>
 
                 <nav className="nav-wrapper py-2">
 
