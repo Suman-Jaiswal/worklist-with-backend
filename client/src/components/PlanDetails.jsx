@@ -70,14 +70,14 @@ export default function PlanDetails() {
     }, [id, topics])
 
     return (
-        <div className=' my-3 container' style={{ height: '79vh', borderLeft: '1px solid #fff', overflowY: 'scroll' }}>
+        <div className=' my-3 container' style={{ height: '79vh', overflowY: 'scroll' }}>
             {
                 pageLoading ? <div style={{
                     marginTop: '40vh'
                 }} className='text-light text-center'><Loader /></div> : access ?
                     <div >
                         <div className="sticky-top text-light" style={{ backgroundColor: '#282828' }}>
-                            <div className="pt-2 d-flex justify-content-between" >
+                            <div className=" d-flex justify-content-between" >
                                 <span className="lead fw-bold text-light">  {plan && plan.title}</span>
                                 <span className='' >
                                     <Collaborators text={'text-light'} collaborators={plan.collaborators} plan={plan} setPlan={setPlan} />
@@ -86,7 +86,7 @@ export default function PlanDetails() {
                                 </span>
                             </div>
 
-                            <div style={{ borderBottom: '0.5px solid #dddddd' }} className=" pb-3 d-flex text-light justify-content-between" >
+                            <div style={{ borderBottom: '0.5px solid #dddddd' }} className=" pb-1 d-flex text-light justify-content-between" >
                                 <span style={{ width: '70%', fontSize: '13px' }} > {plan && plan.description} </span>
                                 <span style={{ fontSize: '13px' }} className='me-2' > {' Topics: '} {topicsR.length > 0 && topicsR.length}</span>
                             </div>

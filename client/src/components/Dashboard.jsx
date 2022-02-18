@@ -48,7 +48,7 @@ export default function Dashboard() {
 
 
     return (
-        <div className='d-flex flex-wrap align-items-start container-lg my-5 gap-4'>
+        <div className='d-flex flex-wrap align-items-start justify-content-center container-lg my-5 gap-4'>
             {
                 pageLoading ? <div style={{
                     marginTop: '35vh'
