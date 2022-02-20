@@ -47,7 +47,7 @@ export default function Dashboard() {
     }, [dispatch, user, authorised, loading])
 
 
-    return (
+    return (<>
         <div className='d-flex flex-wrap align-items-start justify-content-center container-lg my-5 gap-4'>
             {
                 pageLoading ? <div style={{
@@ -78,5 +78,9 @@ export default function Dashboard() {
                     </>
             }
         </div>
+        <br /><br />
+        <br /><br />
+    </>
+
     )
 }
