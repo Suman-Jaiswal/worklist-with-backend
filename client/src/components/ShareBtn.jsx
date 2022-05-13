@@ -41,7 +41,9 @@ export default function ShareBtn({ plan, setPlan, textClass, text }) {
     return (
         <>
             <Button size='sm' variant={'transparent'} className={text} onClick={openModal} aria-labelledby="contained-modal-title-vcenter" >
-                <FontAwesomeIcon icon={faUserPlus} size='sm' /> <span className={`ms-1 ${textClass}`}>Share</span>
+                <FontAwesomeIcon icon={faUserPlus} size='xs' /> <span style={{
+                    fontSize: 12
+                }} className={`ms-1 ${textClass}`}>Share</span>
             </Button>
 
             <Modal show={open} onHide={closeModal} >

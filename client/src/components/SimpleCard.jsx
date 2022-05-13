@@ -18,7 +18,8 @@ const useStyles = makeStyles({
     root: {
         width: 300,
         padding: 0,
-        backgroundColor: '#363636'
+        backgroundColor: '#363636',
+        overflow: 'visible'
     },
     bullet: {
         display: 'inline-block',
@@ -26,13 +27,13 @@ const useStyles = makeStyles({
         transform: 'scale(0.8)',
     },
     title: {
-        fontSize: 15,
-        fontWeight: 'bold',
+        fontSize: 12,
+        // fontWeight: 'bold',
     },
     pos: {
-        marginTop: 10,
-        marginBottom: 12,
-        fontSize: '13px'
+        marginTop: 5,
+        marginBottom: 5,
+        fontSize: 12
     },
 });
 
@@ -69,9 +70,9 @@ export default function SimpleCard({ plan, sno }) {
                             {sno}
                         </div>
 
-                        <Typography className='text-light'>
+                        <div className='text-light'>
                             {plan.title}
-                        </Typography>
+                        </div>
                         <div>
                             {
                                 plan.author.email === user.email ?
@@ -79,7 +80,7 @@ export default function SimpleCard({ plan, sno }) {
                                         <Dropdown.Toggle className='p-0' size='sm' variant="transparent" id="dropdown-basic">
                                             <FontAwesomeIcon className='mb-2 text-light' icon={faEllipsisH} />
                                         </Dropdown.Toggle>
-                                        <Dropdown.Menu >
+                                        <Dropdown.Menu style={{ padding: 0 }}>
                                             <div className='text-dark'> <EditPlanBtn plan={plan} /></div>
                                             <div className='text-dark'> <ShareBtn plan={plan} /></div>
                                             <div>
@@ -102,7 +103,7 @@ export default function SimpleCard({ plan, sno }) {
                         </Typography>
 
                         <Typography className={classes.pos} color="text-light">
-                            {' Topics: '} {filteredTopics.length},
+                            {' Topics: '} {filteredTopics.length}
                             <span className='text-danger' style={{ float: 'right' }} >
                                 {
                                     progress === 100 ? <FontAwesomeIcon size='lg' icon={faCheckCircle} className='text-success' /> : ' left: ' + filteredTopics.filter(x => x.completed === false).length
@@ -112,7 +113,9 @@ export default function SimpleCard({ plan, sno }) {
 
                         <div className='py-2' >
                             <ProgressBar style={{
-                                backgroundColor: '#282828'
+                                backgroundColor: '#282828',
+                                height: 3,
+                                fontSize: 0
                             }} now={progress} label={`${progress}%`} />
                         </div>
 

@@ -29,7 +29,7 @@ export default function LogoutBtn() {
             clientId={CLIENT_ID}
             render={props => (
                 <Button size='sm' variant='danger' onClick={props.onClick} disabled={props.disabled} className='mx-2' aria-labelledby="contained-modal-title-vcenter" >
-                    <FontAwesomeIcon icon={faPowerOff} size='sm' /> <span className='ms-1 create-text'>Logout</span>
+                    <FontAwesomeIcon icon={faPowerOff} size='sm' />
                 </Button>
             )}
             onLogoutSuccess={onLogoutSuccess}

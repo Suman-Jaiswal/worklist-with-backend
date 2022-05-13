@@ -49,7 +49,9 @@ export default function EditPlanBtn({ plan, setPlan, textClass, text }) {
     return (
         <>
             <Button variant={'transparent'} className={text} onClick={openModal} size='sm' aria-labelledby="contained-modal-title-vcenter" >
-                <FontAwesomeIcon icon={faPen} size='sm' /> <span className={`ms-1 ${textClass}`}>Edit Plan</span>
+                <FontAwesomeIcon icon={faPen} size='sm' /> <span style={{
+                    fontSize: 12
+                }} className={`ms-1 ${textClass}`}>Edit Plan</span>
             </Button>
 
             <Modal show={open} onHide={closeModal} >
