@@ -16,10 +16,11 @@ import { faCheckCircle, faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 
 const useStyles = makeStyles({
     root: {
-        width: 300,
+        width: 280,
         padding: 0,
         backgroundColor: '#363636',
-        overflow: 'visible'
+        overflow: 'visible',
+        margin: "auto"
     },
     bullet: {
         display: 'inline-block',
@@ -27,7 +28,7 @@ const useStyles = makeStyles({
         transform: 'scale(0.8)',
     },
     title: {
-        fontSize: 12,
+        fontSize: 13,
         // fontWeight: 'bold',
     },
     pos: {
@@ -91,18 +92,18 @@ export default function SimpleCard({ plan, sno }) {
 
                                         </Dropdown.Menu>
                                     </Dropdown> :
-                                    <div style={{ fontSize: '16px' }} className="text-light fw-bold">shared by: {plan.author.givenName}</div>
+                                    <div style={{ fontSize: '13px' }} className="text-light fw-bold">shared by: {plan.author.givenName}</div>
                             }
                         </div>
                     </div>
 
                     <Link className='text-decoration-none text-light' to={`/plan/${plan._id}`}  >
 
-                        <Typography className={classes.pos} color="text-light">
+                        <Typography className={classes.pos} >
                             {plan.description}
                         </Typography>
 
-                        <Typography className={classes.pos} color="text-light">
+                        <Typography className={classes.pos}>
                             {' Topics: '} {filteredTopics.length}
                             <span className='text-danger' style={{ float: 'right' }} >
                                 {
@@ -111,11 +112,13 @@ export default function SimpleCard({ plan, sno }) {
                             </span>
                         </Typography>
 
-                        <div className='py-2' >
+                        <div className='py-2 d-flex align-items-center' >
+                            <div className='pe-3' style={{ fontSize: '11px' }}>{progress}%</div>
                             <ProgressBar style={{
                                 backgroundColor: '#282828',
                                 height: 3,
-                                fontSize: 0
+                                fontSize: 0,
+                                width: "95%"
                             }} now={progress} label={`${progress}%`} />
                         </div>
 

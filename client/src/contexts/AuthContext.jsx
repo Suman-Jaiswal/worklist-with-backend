@@ -13,7 +13,7 @@ function AuthContextProvider(props) {
 
     const [state, dispatch] = useReducer(authReducer, initialState);
     useEffect(() => {
-        console.log('user', state.user)
+        // console.log('user', state.user)
     }, [state])
 
     return (

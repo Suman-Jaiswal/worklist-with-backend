@@ -23,7 +23,7 @@ function Navbar() {
 
                     <div className="container justify-content-between d-flex">
 
-                        <div className="text-center d-flex">
+                        <div className="text-center d-flex align-items-center">
                             <Icon para={1} />
                             <Link to='/' className='brand-logo text-light text-decoration-none ms-2 text-center my-auto'> Ninja Worklist</Link>
                         </div>

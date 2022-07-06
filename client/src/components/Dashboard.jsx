@@ -7,6 +7,7 @@ import Icon from './Icon'
 import axios from 'axios'
 import { AuthContext } from '../contexts/AuthContext'
 import Loader from './Loader'
+import Footer from './Footer'
 
 export default function Dashboard() {
 
@@ -48,39 +49,50 @@ export default function Dashboard() {
 
 
     return (<>
-        <div className='d-flex flex-wrap align-items-start justify-content-center container-lg my-5 gap-4'>
-            {
-                pageLoading ? <div style={{
-                    marginTop: '35vh'
-                }} className='text-secondary mx-auto'><Loader /></div> :
-                    <>
-                        {
-                            authorised ?
-                                plans.length > 0 ? plans.map(
-                                    (plan, i) => <SimpleCard
-                                        key={plan._id}
-                                        sno={i + 1}
-                                        plan={plan}
-                                    />
-                                ) :
-                                    <div className='h4 text-secondary m-auto mt-2' >
 
-                                        <h4 className="text-secondary mb-5 text-center"> + Create Your Plans Here + </h4>
-
-                                        <Icon para={2} />
-
-                                        <div style={{ position: 'relative', bottom: '150px', textAlign: 'center', width: '73%' }} >
-                                            <AddPlanBtn variant={'transparent'} color={'text-secondary'} />
+        <div className='container-lg my-4' style={{
+            minHeight: '92vh'
+        }}>
+            <div className='row'
+            >
+                {
+                    pageLoading ? <div className='text-secondary mx-auto pt-5'><Loader /></div> :
+                        <>
+                            {
+                                authorised ?
+                                    plans.length > 0 ? plans.map(
+                                        (plan, i) => <div className='col-12 col-sm-6 col-md-4 col-lg-3 p-2'
+                                            key={plan._id}
+                                        >
+                                            <SimpleCard
+                                                sno={i + 1}
+                                                plan={plan}
+                                            />
                                         </div>
+                                    ) :
+                                        <div className='text-secondary m-auto mt-5' >
 
-                                    </div> : <h4 className='text-secondary mx-auto'>You need to Login first</h4>
-                        }
-                    </>
-            }
+                                            <h4 className="text-secondary mb-3 text-center"> Create Your Plans! </h4>
+
+                                            <div className='text-center'
+                                                style={{ textAlign: "center", position: "absolute", top: "calc(50vh - 150px)", left: "calc(50vw - 100px)" }}>
+                                                <Icon para={2} />
+                                            </div>
+                                            <div style={{ textAlign: "center", position: "absolute", top: "50vh", left: "calc(50vw - 35px)" }}>
+                                                <AddPlanBtn variant={'outline-secondary'} />
+                                            </div>
+
+
+                                        </div> : <h4 className='text-secondary text-center mt-5'>You need to Login first</h4>
+                            }
+                        </>
+                }
+
+            </div>
+
         </div>
-        <br /><br />
-        <br /><br />
-    </>
+        <Footer />
 
+    </>
     )
 }

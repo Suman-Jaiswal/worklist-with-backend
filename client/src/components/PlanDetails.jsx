@@ -69,21 +69,21 @@ export default function PlanDetails() {
             .catch(err => console.log(err))
     }, [id, topics])
 
-    return (
-        <div className=' my-3 container' style={{ height: '79vh', overflowY: 'scroll' }}>
+    return (<>
+
+        <div className='container' style={{ height: '90vh', overflowY: 'scroll' }}>
             {
-                pageLoading ? <div style={{
-                    marginTop: '40vh'
-                }} className='text-light text-center'><Loader /></div> : access ?
-                    <div >
-                        <div className="sticky-top text-light" style={{ backgroundColor: '#282828' }}>
-                            <div className=" d-flex justify-content-between" >
-                                <span className="lead fw-bold text-light">  {plan && plan.title}</span>
-                                <span className='' >
+                pageLoading ? <div className='text-light text-center mt-5'><Loader /></div> : access ?
+                    <>
+                        <div className="sticky-top text-light pt-3" style={{ backgroundColor: '#282828' }}>
+                            <div className=" d-flex flex-column-reverse flex-md-row justify-content-between align-items-center" >
+                                <div className=" fw-bold text-light  w-100 w-md-auto" style={{ fontSize: '15px' }}>  {plan && plan.title}</div>
+                                <div className='d-flex gap-3 justify-content-between mb-2 w-100 w-md-auto' >
                                     <Collaborators text={'text-light'} collaborators={plan.collaborators} plan={plan} setPlan={setPlan} />
                                     <EditPlanBtn text={'text-light'} textClass={'create-text'} plan={plan} setPlan={setPlan} />
                                     <ShareBtn text={'text-light'} textClass={'create-text'} setPlan={setPlan} plan={plan} />
-                                </span>
+                                    <AddTopicBtn variant={'primary'} planID={id} />
+                                </div>
                             </div>
 
                             <div style={{ borderBottom: '0.5px solid #dddddd' }} className=" pb-1 d-flex text-light justify-content-between" >
@@ -91,9 +91,6 @@ export default function PlanDetails() {
                                 <span style={{ fontSize: '13px' }} className='me-2' > {' Topics: '} {topicsR.length > 0 && topicsR.length}</span>
                             </div>
                         </div>
-
-
-                        <div className="container p-0 py-3"> <AddTopicBtn variant={'outline-primary'} planID={id} /></div>
 
                         <div className="container p-0 my-2" style={{ backgroundColor: '#282828' }}>
 
@@ -105,13 +102,17 @@ export default function PlanDetails() {
                                     </div>) : null
                                 }
                             </div>
-
+                            <div className='text-secondary mb-4 text-center'>That's All!</div>
                         </div>
 
-                    </div> : <h4 className='text-danger text-center pt-5'>You are not allowed to access this page, Contact Author! {!authorised ? 'Also make sure you are logged in.' : null} </h4>
-            }
 
+                    </> :
+                    <div>
+                        <div className='text-danger text-center mt-5'>You are not allowed to access this page, Contact Author! {!authorised ? 'Also make sure you are logged in.' : null} </div>
+                    </div>
+            }
         </div>
 
+    </>
     )
 }

@@ -35,7 +35,10 @@ export default function Collaborators({ collaborators, plan, setPlan, text }) {
     return (
         <>
             <Button variant={'transparent'} className={text} onClick={openModal} size='sm' aria-labelledby="contained-modal-title-vcenter" >
-                <FontAwesomeIcon icon={faUsers} size='sm' /> <span className='ms-1 create-text'>Collaborators</span>
+                <FontAwesomeIcon icon={faUsers} size='sm' /> <span
+                    style={{
+                        fontSize: 12
+                    }} className='ms-1 create-text'>Collaborators</span>
             </Button>
 
             <Modal size="sm" show={open} onHide={closeModal} >

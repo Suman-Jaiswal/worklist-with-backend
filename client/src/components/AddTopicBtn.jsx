@@ -50,8 +50,11 @@ export default function AddTopicBtn({ variant, color, planID }) {
 
     return (
         <>
-            <Button variant={variant} className={color} onClick={openModal} size='sm' aria-labelledby="contained-modal-title-vcenter" >
-                <FontAwesomeIcon icon={faPlus} size='sm' /> <span className='ms-1'>Add Topics</span>
+            <Button
+                variant={variant} className={color} onClick={openModal} size='sm' aria-labelledby="contained-modal-title-vcenter"
+                style={{ fontSize: 12 }} >
+                <FontAwesomeIcon icon={faPlus} size='sm' /> <span
+                    style={{ fontSize: 12 }} className='ms-1'>Add Topics</span>
             </Button>
 
             <Modal show={open} onHide={closeModal} >

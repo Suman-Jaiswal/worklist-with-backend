@@ -74,7 +74,9 @@ export default function AddPlanBtn({ variant, color }) {
     return (
         <>
             <Button size='sm' disabled={Object.entries(user).length === 0} variant={variant} className={color} onClick={openModal} aria-labelledby="contained-modal-title-vcenter" >
-                <FontAwesomeIcon icon={faPlus} size='sm' /> <span className='ms-1 create-text'>Create</span>
+                <FontAwesomeIcon icon={faPlus} size='sm' /> <span
+                    style={{ fontSize: 12 }}
+                    className='ms-1'>Create</span>
             </Button>
 
             <Modal size="lg" show={open} onHide={closeModal} >
