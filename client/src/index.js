@@ -6,14 +6,16 @@ import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter } from 'react-router-dom';
 import AuthContextProvider from './contexts/AuthContext';
-
-
+import PlanContextProvider from './contexts/PlanContext';
 
 ReactDOM.render(
     <AuthContextProvider>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
+        <PlanContextProvider>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </PlanContextProvider>
+
     </AuthContextProvider>
     ,
     document.getElementById('root')

@@ -4,7 +4,10 @@ import React from 'react'
 
 export default function Footer() {
     return (
-        <div style={{ textAlign: "center", padding: "15px", width: '100%', backgroundColor: '#212121' }}>
+        <div style={{
+            textAlign: "center", padding: "15px", width: '75%', backgroundColor: '#212121',
+            position: "fixed", bottom: 0
+        }}>
             <div className='footer container'>
 
                 <p className="cp-text" style={{ fontSize: 12 }}>

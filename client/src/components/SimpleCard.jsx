@@ -4,7 +4,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { Dropdown, ProgressBar } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import DeletePlanBtn from './DeletePlanBtn';
 import { useState, useEffect } from 'react';
 import { PlanContext } from '../contexts/PlanContext';
@@ -14,29 +14,7 @@ import ShareBtn from './ShareBtn';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 
-const useStyles = makeStyles({
-    root: {
-        width: 280,
-        padding: 0,
-        backgroundColor: '#363636',
-        overflow: 'visible',
-        margin: "auto"
-    },
-    bullet: {
-        display: 'inline-block',
-        margin: '0 2px',
-        transform: 'scale(0.8)',
-    },
-    title: {
-        fontSize: 13,
-        // fontWeight: 'bold',
-    },
-    pos: {
-        marginTop: 5,
-        marginBottom: 5,
-        fontSize: 12
-    },
-});
+
 
 export default function SimpleCard({ plan, sno }) {
 
@@ -44,7 +22,32 @@ export default function SimpleCard({ plan, sno }) {
     const { topics } = useContext(PlanContext).state
     const [progress, setProgress] = useState(null)
     const [filteredTopics, setFilteredTopics] = useState([])
-    const classes = useStyles();
+    const { id } = useParams()
+
+    const classes = {
+        root: {
+            width: "100%",
+            padding: 0,
+            overflow: 'visible',
+            backgroundColor: id === plan._id ? '#363636' : '#282828',
+            borderBottom: "1px solid #ddd",
+            margin: "auto"
+        },
+        bullet: {
+            display: 'inline-block',
+            margin: '0 2px',
+            transform: 'scale(0.8)',
+        },
+        title: {
+            fontSize: 13,
+            // fontWeight: 'bold',
+        },
+        pos: {
+            marginTop: 5,
+            marginBottom: 5,
+            fontSize: 12
+        },
+    };
 
     useEffect(() => {
         setFilteredTopics(topics.filter(topic => topic.planID === plan._id))
@@ -53,27 +56,29 @@ export default function SimpleCard({ plan, sno }) {
 
     useEffect(() => {
         const completed = filteredTopics.filter(x => x.completed === true).length
-        const total = filteredTopics.length
-        const now = Math.floor((completed / total) * 100)
-        setProgress(now)
+        if (completed === 0) setProgress(0);
+        else {
+            const total = filteredTopics.length
+            const now = Math.floor((completed / total) * 100)
+            setProgress(now)
+        }
+
     }, [plan, topics, filteredTopics])
 
 
 
     return (
         <div>
-            <Card className={classes.root}>
+            <div style={classes.root}>
 
                 <CardContent className='p-3'>
 
-                    <div className={`${classes.title} d-flex justify-content-between  `}>
+                    <div style={classes.title} className={`d-flex justify-content-between`}>
                         <div className='text-light'>
-                            {sno}
+                            {sno}.  {plan.title}
                         </div>
 
-                        <div className='text-light'>
-                            {plan.title}
-                        </div>
+
                         <div>
                             {
                                 plan.author.email === user.email ?
@@ -92,18 +97,18 @@ export default function SimpleCard({ plan, sno }) {
 
                                         </Dropdown.Menu>
                                     </Dropdown> :
-                                    <div style={{ fontSize: '13px' }} className="text-light fw-bold">shared by: {plan.author.givenName}</div>
+                                    <div style={{ fontSize: '13px' }} className="text-secondary">shared by: {plan.author.givenName}</div>
                             }
                         </div>
                     </div>
 
                     <Link className='text-decoration-none text-light' to={`/plan/${plan._id}`}  >
 
-                        <Typography className={classes.pos} >
+                        <Typography style={classes.pos} >
                             {plan.description}
                         </Typography>
 
-                        <Typography className={classes.pos}>
+                        <Typography style={classes.pos}>
                             {' Topics: '} {filteredTopics.length}
                             <span className='text-danger' style={{ float: 'right' }} >
                                 {
@@ -115,7 +120,7 @@ export default function SimpleCard({ plan, sno }) {
                         <div className='py-2 d-flex align-items-center' >
                             <div className='pe-3' style={{ fontSize: '11px' }}>{progress}%</div>
                             <ProgressBar style={{
-                                backgroundColor: '#282828',
+                                backgroundColor: '#212121',
                                 height: 3,
                                 fontSize: 0,
                                 width: "95%"
@@ -126,7 +131,7 @@ export default function SimpleCard({ plan, sno }) {
 
                 </CardContent>
 
-            </Card>
+            </div>
         </div>
 
     );

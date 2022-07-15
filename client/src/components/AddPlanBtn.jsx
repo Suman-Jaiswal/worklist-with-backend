@@ -56,7 +56,7 @@ export default function AddPlanBtn({ variant, color }) {
         })
             .then(res => {
                 dispatch({ type: 'ADD_PLAN', payload: res.data })
-                axios.post(`/api/topics/${res.data._id}`, {
+                topics.length > 0 && axios.post(`/api/topics/${res.data._id}`, {
                     topics: makeTopics(res.data._id)
                 })
                     .then(res => {
@@ -93,9 +93,9 @@ export default function AddPlanBtn({ variant, color }) {
                         <Form.Label>Title</Form.Label>
                         <Form.Control required className='mb-4' onChange={(e) => setTitle(e.target.value)} placeholder={'Title'} />
                         <Form.Label>Description</Form.Label>
-                        <Form.Control className='mb-4' onChange={(e) => setDescription(e.target.value)} placeholder={'Description'} />
+                        <Form.Control required className='mb-4' onChange={(e) => setDescription(e.target.value)} placeholder={'Description'} />
                         <Form.Label>Topics</Form.Label>
-                        <Form.Control className='mb-4' as='textarea' rows={8} onChange={(e) => setInput(e.target.value)}
+                        <Form.Control required className='mb-4' as='textarea' rows={8} onChange={(e) => setInput(e.target.value)}
                             placeholder={'Add topics in each line \n ********example*******\n Topic 1\n Topic 2\n Topic 3\n  ...\n '} />
                     </Modal.Body>
 
